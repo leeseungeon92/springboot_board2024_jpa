@@ -4,7 +4,10 @@ import com_codingrecipe.springboot_board2024_jpa.dto.BoardDTO;
 import com_codingrecipe.springboot_board2024_jpa.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,5 +26,26 @@ public class BoardController {
         System.out.println("BoardController.save");
         boardService.save(boardDTO);
         return "index";
+    }
+
+    @GetMapping("/")
+    public String findAll(Model model){
+        //DB에서 전체 게시글 데이터를 가져와서 list.html에 보여준다.
+        List<BoardDTO> boardDTOList = boardService.findAll();
+        model.addAttribute("boardList", boardDTOList);
+        return "list";
+    }
+
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id, Model model) {
+        /*
+        *  해당 게시글의 조회수를 1 증가시키고
+        *  게시글 데이터를 가져와서 detail.html에 출력
+        * */
+
+        boardService.updateHits(id);
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        return "detail";
     }
 }
