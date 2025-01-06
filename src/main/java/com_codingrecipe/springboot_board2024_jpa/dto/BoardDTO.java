@@ -20,6 +20,13 @@ public class BoardDTO {
     private LocalDateTime boardCreatedTime;
     private LocalDateTime boardUpdatedTime;
 
+    public BoardDTO(Long id, String boardWriter, String boardTitle, int boardHits) {
+        this.id = id;
+        this.boardWriter = boardWriter;
+        this.boardTitle = boardTitle;
+        this.boardHits = boardHits;
+    }
+
     //repository에서 가져온 entity타입을 컨트롤러에 보내기 위해 DTO타입으로 변환
     public static BoardDTO toBoardDTO(BoardEntity boardEntity) {
         BoardDTO boardDTO = new BoardDTO();
