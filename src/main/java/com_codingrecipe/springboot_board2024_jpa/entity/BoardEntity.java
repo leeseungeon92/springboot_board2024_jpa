@@ -40,6 +40,9 @@ public class BoardEntity {
     @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BoardFileEntity> boardFileEntityList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<CommentEntity> commentEntityList = new ArrayList<>();
+
     //Entity 클래스에서 repository로 보내기 위해 DTO 타입을 Entity 타입으로 변환함.
     public static BoardEntity toSaveEntity(BoardDTO boardDTO) {
 
