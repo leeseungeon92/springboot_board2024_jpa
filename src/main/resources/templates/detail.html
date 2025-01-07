@@ -34,7 +34,7 @@
   </tr>
   <tr th:if="${board.fileAttached == 1}">
     <th>image</th>
-    <td th:each="fileName: ${board.storedFileName">
+    <td th:each="fileName: ${board.storedFileName}">
       <img th:src="@{|/upload/${fileName}|}" alt="">
     </td>
   </tr>
@@ -50,8 +50,8 @@
   <button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
 </div>
 
-<!-- 댓글 출력 부분 -->
-<!--<div id="comment-list">
+ <!--댓글 출력 부분-->
+<div id="comment-list">
   <table>
     <tr>
       <th>댓글번호</th>
@@ -66,7 +66,7 @@
       <td th:text="${comment.commentCreatedTime}"></td>
     </tr>
   </table>
-</div>-->
+</div>
 
 </body>
 <script th:inline="javascript">
@@ -75,7 +75,7 @@
       const contents = document.getElementById("commentContents").value;
       console.log("작성자: ", writer);
       console.log("내용: ", contents);
-      const id = [[${board.id}]];
+      const id = [[${board.id}]]; // 게시글 번호
       $.ajax({
          // 요청방식: post, 요청주소: /comment/save, 요청데이터: 작성자, 작성내용, 게시글번호
          type: "post",
